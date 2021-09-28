@@ -1,14 +1,108 @@
 <html>
+
 <head>
+    <title>What's for lunch</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(function() {
-            $.getJSON('./food.json', function (json) {
-                console.log(json);
-            });
-        });
+        // $(function() {
+        //     $.getJSON('./food.json', function (json) {
+        //         console.log(json);
+        //     });
+        // });
     </script>
+    <style type="text/css">
+        body {
+            overflow: hidden;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .turnTable {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        .turntable__circle {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            padding: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .turnTable__arrow {
+            position: absolute;
+            margin-top: -25px;
+            transform: translate(-50%, -50%) rotate(180deg);
+            border-color: red transparent transparent transparent;
+            border-width: 50px 15px 0px 15px;
+            border-style: solid;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="container">
+        <div>
+            <div>
+                <canvas id="canvas" width="600" height="600"></canvas>
+            </div>
+            <div class="turnTable">
+                <div class="turntable__arrow"></div>
+                <div class="turntable__circle"></div>
+            </div>
+        </div>
+        <input id="btn" type="button" value="求神拜佛吃什麼" />
+    </div>
 </body>
+<script>
+    var ctx = canvas.getContext('2d');
+    var num = 10;
+    var targetDeg = 0;
+    for (var i = 0; i < num; i++) {
+        ctx.save();
+        // 扇形
+        ctx.beginPath();
+        ctx.translate(300, 300);
+        ctx.moveTo(0, 0);
+        ctx.rotate((360 / num * i + 360 / num / 2) * Math.PI / 180);
+        ctx.arc(0, 0, 300, 0, 2 * Math.PI / num, false);
+        if (i % 2 == 0) {
+            ctx.fillStyle = '#b0e0e6';
+        } else {
+            ctx.fillStyle = '#e4c6d0';
+        }
+        ctx.fill();
+
+        // 框
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = '#b0e0e6';
+        ctx.stroke();
+
+        // 文字
+        ctx.fillStyle = '#fff';
+        ctx.font = '18px sans-serif';
+        ctx.fillText('Woopen木盆 中華加盟門市', 60, 30);
+
+        // 恢复前一個狀態
+        ctx.restore();
+    }
+
+    $('#btn').click(function () {
+        $('#canvas').css('transition','all 6s linear');
+        setTimeout(function () {
+            $('#canvas').css('transition', 'all 6s ease-out');
+            targetDeg += Math.random() * 3600 + 3600;
+
+            $('#canvas').css('transform', `rotate(${targetDeg}deg)`);
+        }, 100);
+    });
+</script>
+
 </html>
