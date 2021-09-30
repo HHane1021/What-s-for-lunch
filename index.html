@@ -3,13 +3,6 @@
 <head>
     <title>What's for lunch</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        // $(function() {
-        //     $.getJSON('./food.json', function (json) {
-        //         console.log(json);
-        //     });
-        // });
-    </script>
     <style type="text/css">
         body {
             overflow: hidden;
@@ -62,46 +55,49 @@
     </div>
 </body>
 <script>
-    var ctx = canvas.getContext('2d');
-    var num = 10;
-    var targetDeg = 0;
-    for (var i = 0; i < num; i++) {
-        ctx.save();
-        // 扇形
-        ctx.beginPath();
-        ctx.translate(300, 300);
-        ctx.moveTo(0, 0);
-        ctx.rotate((360 / num * i + 360 / num / 2) * Math.PI / 180);
-        ctx.arc(0, 0, 300, 0, 2 * Math.PI / num, false);
-        if (i % 2 == 0) {
-            ctx.fillStyle = '#b0e0e6';
-        } else {
-            ctx.fillStyle = '#e4c6d0';
-        }
-        ctx.fill();
+    $(function() {
+        // get food json
+        let food = [];
+        let targetDeg = 0;
+        $.getJSON('./food.json', function (json) {
+            food = json;
+            const ctx = canvas.getContext('2d');
+            const total = food.length;
+            for (let i = 0; i < total; ++i) {
+                ctx.save();
+                // 扇形
+                ctx.beginPath();
+                ctx.translate(300, 300);
+                ctx.moveTo(0, 0);
+                ctx.rotate((360 / total * i + 360 / total / 2) * Math.PI / 180);
+                ctx.arc(0, 0, 300, 0, 2 * Math.PI / total, false);
+                ctx.fillStyle = food[i].color;
+                ctx.fill();
 
-        // 框
-        ctx.lineWidth = 0.5;
-        ctx.strokeStyle = '#b0e0e6';
-        ctx.stroke();
+                // 框
+                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = food[i].color;
+                ctx.stroke();
 
-        // 文字
-        ctx.fillStyle = '#fff';
-        ctx.font = '18px sans-serif';
-        ctx.fillText('Woopen木盆 中華加盟門市', 60, 30);
+                // 文字
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '18px sans-serif';
+                ctx.fillText(food[i].shop, 60, 30);
 
-        // 恢复前一個狀態
-        ctx.restore();
-    }
+                // 恢复前一個狀態
+                ctx.restore();
+            }
+        });
 
-    $('#btn').click(function () {
-        $('#canvas').css('transition','all 6s linear');
-        setTimeout(function () {
-            $('#canvas').css('transition', 'all 6s ease-out');
-            targetDeg += Math.random() * 3600 + 3600;
+        $('#btn').click(function () {
+            $('#canvas').css('transition','all 6s linear');
+            setTimeout(function () {
+                $('#canvas').css('transition', 'all 6s ease-out');
+                targetDeg += Math.random() * 3600 + 3600;
 
-            $('#canvas').css('transform', `rotate(${targetDeg}deg)`);
-        }, 100);
+                $('#canvas').css('transform', `rotate(${targetDeg}deg)`);
+            }, 100);
+        });
     });
 </script>
 
