@@ -10,9 +10,19 @@
         "color": "#FF8000"
     },
     {
+        "shop": "土魠魚羹",
+        "address": "",
+        "color": "#FFDD55"
+    },
+    {
         "shop": "鴨肉本",
         "address": "803高雄市鹽埕區富野路107號",
         "color": "#B266FF"
+    },
+    {
+        "shop": "麥當勞",
+        "address": "",
+        "color": "#FFAA33"
     },
     {
         "shop": "川老頭鍋貼與蒸餃",
@@ -20,8 +30,63 @@
         "color": "#FF9999"
     },
     {
+        "shop": "春捲",
+        "address": "",
+        "color": "#AAAAAA"
+    },
+    {
         "shop": "Le fleur Cafe花兒咖啡",
         "address": "801高雄市前金區六合二路190號",
         "color": "#99CCFF"
+    },
+    {
+        "shop": "永記牛肉湯 自強店",
+        "address": "801高雄市前金區自強一路48號",
+        "color": "#FFFFBB"
+    },
+    {
+        "shop": "甘麵店",
+        "address": "801高雄市前金區自強一路57號",
+        "color": "#CCBBFF"
+    },
+    {
+        "shop": "錦田郭肉燥飯 (自強店)",
+        "address": "801高雄市前金區自強一路190號",
+        "color": "#CC6600"
+    },
+    {
+        "shop": "𡘙師傅 七賢店",
+        "address": "801高雄市前金區七賢二路233號",
+        "color": "#55AA00"
+    },
+    {
+        "shop": "當歸鴨麵線",
+        "address": "",
+        "color": "#CC6600"
+    },
+    {
+        "shop": "肉圓",
+        "address": "",
+        "color": "#9900FF"
+    },
+    {
+        "shop": "丹丹漢堡 七賢店",
+        "address": "801高雄市前金區七賢二路224號",
+        "color": "#CCFF33"
+    },
+    {
+        "shop": "虱目魚專賣店",
+        "address": "",
+        "color": "#AAFFEE"
+    },
+    {
+        "shop": "肯德基",
+        "address": "",
+        "color": "#0066FF"
+    },
+    {
+        "shop": "小賀的店",
+        "address": "807高雄市三民區河北二路108號",
+        "color": "#CC0000"
     }
 ]
