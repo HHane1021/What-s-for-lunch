@@ -3,6 +3,7 @@
 <head>
     <title>What's for lunch</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style type="text/css">
         body {
             overflow: hidden;
@@ -59,17 +60,18 @@
         // get food json
         let food = [];
         let targetDeg = 0;
+        let total = 0;
         $.getJSON('./food.json', function (json) {
             food = json;
             const ctx = canvas.getContext('2d');
-            const total = food.length;
+            total = food.length;
             for (let i = 0; i < total; ++i) {
                 ctx.save();
                 // 扇形
                 ctx.beginPath();
                 ctx.translate(300, 300);
                 ctx.moveTo(0, 0);
-                ctx.rotate((360 / total * i + 360 / total / 2) * Math.PI / 180);
+                ctx.rotate((360 / total * i - 90) * Math.PI / 180);
                 ctx.arc(0, 0, 300, 0, 2 * Math.PI / total, false);
                 ctx.fillStyle = food[i].color;
                 ctx.fill();
@@ -80,9 +82,9 @@
                 ctx.stroke();
 
                 // 文字
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '18px sans-serif';
-                ctx.fillText(food[i].shop, 60, 30);
+                ctx.fillStyle = '#000000';
+                ctx.font = '16px sans-serif';
+                ctx.fillText(food[i].shop, 80, 20);
 
                 // 恢复前一個狀態
                 ctx.restore();
@@ -90,12 +92,20 @@
         });
 
         $('#btn').click(function () {
-            $('#canvas').css('transition','all 6s linear');
+            $('#canvas').css('transition','all 4s linear');
             setTimeout(function () {
-                $('#canvas').css('transition', 'all 6s ease-out');
-                targetDeg += Math.random() * 3600 + 3600;
-
+                $('#canvas').css('transition', 'all 4s ease-out');
+                targetDeg += Math.random() * 1800 + 1800;
+                
                 $('#canvas').css('transform', `rotate(${targetDeg}deg)`);
+                setTimeout(function () {
+                    const index = Math.floor((360 - (targetDeg % 360)) / (360 / total) );
+                    let text = food[index].shop;
+                    if (food[index].address !== '') {
+                        text += `<a href="javascript: window.open('https://www.google.com/maps/search/?api=1&query=${food[index].address}')"><img width="40" src="./assets/image/googlemap.png" alt="Italian Trulli"></a>`;
+                    }
+                    Swal.fire(text);
+                }, 4000);
             }, 100);
         });
     });
